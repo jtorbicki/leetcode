@@ -8,7 +8,7 @@ class Solution {
             p1 - p0
         })
         queue.addAll(nums.toList())
-        repeat(k - 1    ) {
+        repeat(k - 1) {
             queue.poll()
         }
         return queue.peek()

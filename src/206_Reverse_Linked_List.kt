@@ -7,14 +7,14 @@ class ListNode(var `val`: Int) {
 class Solution {
     var last:ListNode? = null
 
-    fun reverseInternal(head: ListNode?): ListNode? {
-        if (head?.next == null) {
-            last = head
-            return head
+    fun reverseInternal(node: ListNode?): ListNode? {
+        if (node?.next == null) {
+            last = node
+            return node
         } else {
-            val reversed = reverseInternal(head.next)
-            reversed?.next = head
-            return head
+            val reversed = reverseInternal(node.next)
+            reversed?.next = node
+            return node
         }
     }
 
