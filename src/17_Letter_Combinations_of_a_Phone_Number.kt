@@ -25,7 +25,6 @@ class Solution {
             for (c in map[digit]!!) {
                 backtrack(str + c, index + 1)
             }
-            backtrack(str, index + 1)
         }
 
         if (digits == "") return result
@@ -36,5 +35,5 @@ class Solution {
 
 fun main(args: Array<String>) {
     val solution = Solution()
-    solution.letterCombinations("").also { println(it) }
+    solution.letterCombinations("23").also { println(it) }
 }

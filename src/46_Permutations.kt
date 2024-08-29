@@ -24,33 +24,61 @@ package `46_Permutations`
 //    }
 //}
 
+//class Solution {
+//
+//    val perms = mutableListOf<List<Int>>()
+//    val perm = mutableListOf<Int>()
+//
+//    private fun findPermutations(nums: MutableList<Int>) {
+//        if (nums.isEmpty()) {
+//            perms.add(ArrayList(perm))
+//            return
+//        }
+//
+//        for ((index, n) in nums.withIndex()) {
+//            perm.add(n)
+//            val copy = ArrayList(nums)
+//            copy.removeAt(index)
+//            findPermutations(copy)
+//            perm.removeLast()
+//        }
+//    }
+//
+//    fun permute(nums: IntArray): List<List<Int>> {
+//        findPermutations(nums.toMutableList())
+//        return perms
+//    }
+//}
+
 class Solution {
 
-    val perms = mutableListOf<List<Int>>()
-    val perm = mutableListOf<Int>()
-
-    private fun findPermutations(nums: MutableList<Int>) {
-        if (nums.isEmpty()) {
-            perms.add(ArrayList(perm))
-            return
-        }
-
-        for ((index, n) in nums.withIndex()) {
-            perm.add(n)
-            val copy = ArrayList(nums)
-            copy.removeAt(index)
-            findPermutations(copy)
-            perm.removeLast()
-        }
-    }
 
     fun permute(nums: IntArray): List<List<Int>> {
-        findPermutations(nums.toMutableList())
-        return perms
+
+        val result = mutableListOf<List<Int>>()
+        val elements = mutableListOf<Int>()
+
+        fun bt(list: List<Int>) {
+            if (elements.size == nums.size) {
+                result.add(ArrayList(elements))
+                return
+            }
+
+            for (i in 0..list.lastIndex) {
+                val copy = list.toMutableList()
+                copy.removeAt(i)
+                elements.add(list[i])
+                bt(copy)
+                elements.removeLast()
+            }
+        }
+
+        bt(nums.toList())
+        return result
     }
 }
 
 fun main(args: Array<String>) {
     val solution = Solution()
-    solution.permute(intArrayOf(1, 2, 3, 4, 5)).let(::println)
+    solution.permute(intArrayOf(1, 2, 3)).let(::println)
 }
