@@ -1,5 +1,8 @@
 package `33_Search_in_Rotated_Sorted_Array`
 
+import java.util.Random
+import kotlin.time.measureTime
+//
 //class Solution {
 //    fun search(nums: IntArray, target: Int): Int {
 //        var left = 0
@@ -28,7 +31,7 @@ package `33_Search_in_Rotated_Sorted_Array`
 //        return -1
 //    }
 //}
-
+//
 class Solution {
     fun search(nums: IntArray, target: Int): Int {
         var lo = 0
@@ -75,5 +78,14 @@ class Solution {
 
 fun main() {
     val s = Solution()
-    s.search(intArrayOf(7, 8, 9, 10, 11, 12, 13, 14, 1, 2, 3, 4, 5, 6), 11)
+    var index = 0
+    val array = IntArray(50_000_000) { index++ }
+    val rand = Random(0)
+
+    measureTime {
+        for (i in 0..10000000) {
+            val r = rand.nextInt(100_000_000)
+            s.search(array, r)
+        }
+    }.also { println(it) }
 }
