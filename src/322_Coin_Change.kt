@@ -24,6 +24,6 @@ class Solution {
 fun main() {
     val s = Solution()
     s.coinChange(
-        intArrayOf(2,5,10,1), 27
+        intArrayOf(3,7,405,436), 8839
     ).also { println(it) }
 }
