@@ -5,7 +5,7 @@ class Solution {
         val rows = 0..< board.size
         val cols = 0..< board[0].size
         val directions = listOf(0 to 1, 0 to -1, 1 to 0, -1 to 0)
-        var visited = mutableSetOf<Pair<Int, Int>>()
+        val visited = mutableSetOf<Pair<Int, Int>>()
 
         fun dfs(row: Int, col: Int, index: Int): Boolean {
             if (index == word.length) {
@@ -21,7 +21,6 @@ class Solution {
                 val nr = row + rd
                 val nc = col + cd
                 if (dfs(nr, nc, index + 1)) return true
-
             }
             visited.remove(row to col)
             return false
