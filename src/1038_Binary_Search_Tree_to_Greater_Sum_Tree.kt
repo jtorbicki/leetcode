@@ -8,17 +8,18 @@ class TreeNode(var `val`: Int) {
 class Solution {
     fun bstToGst(root: TreeNode?): TreeNode? {
 
-        fun dfs(node: TreeNode?, sum: Int): Int {
-            if (node == null)
-                return 0
+        var sum = 0
 
-            val v1 = dfs(node.right, sum)
-            node.`val` += v1 + sum
-            val v2 = dfs(node.left, node.`val`)
-            return node.`val`
+        fun dfs(node: TreeNode?) {
+            if (node == null) return
+
+            dfs(node.right)
+            sum += node.`val`
+            node.`val` = sum
+            dfs(node.left)
         }
 
-        dfs(root, 0)
+        dfs(root)
         return root
     }
 }
