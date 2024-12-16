@@ -41,10 +41,10 @@ class TimeMap {
     private val map = mutableMapOf<String, TreeMap<Int, String>>()
 
     fun set(key: String, value: String, timestamp: Int) {
-        if (!map.containsKey(key)) {
-            map[key] = TreeMap()
+        val tree = map.getOrPut(key) {
+            TreeMap()
         }
-        map.get(key)!![timestamp] = value
+        tree[timestamp] = value
     }
 
     fun get(key: String, timestamp: Int): String {
@@ -52,8 +52,7 @@ class TimeMap {
         if (timestamp > tree.keys.last()) {
             return tree.values.last()
         }
-        val key: Int = tree.floorKey(timestamp) ?: return ""
-        return tree.get(key) ?: ""
+        return tree.floorEntry(timestamp)?.value ?: ""
     }
 }
 

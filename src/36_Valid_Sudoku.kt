@@ -11,34 +11,43 @@ class Solution {
         val rows = 0..board.lastIndex
         val cols = 0..board[0].lastIndex
 
-        for (row in rows) {
-            val rowValid = validate(board[row])
-            if (!rowValid) return false
-        }
-
-        for (col in cols) {
-            val list = mutableListOf<Char>()
+        fun validRows(): Boolean {
             for (row in rows) {
-                list.add(board[row][col])
+                val rowValid = validate(board[row])
+                if (!rowValid) return false
             }
-            val colValid = validate(list.toCharArray())
-            if (!colValid) return false
+            return true
         }
 
-        for (squareCol in 0..<3) {
-            for (squareRow in 0..<3) {
+        fun validCols(): Boolean {
+            for (col in cols) {
                 val list = mutableListOf<Char>()
-                for (col in 0..<3) {
-                    for (row in 0..<3) {
-                        list.add(board[squareRow * 3 + row][squareCol * 3 + col])
-                    }
+                for (row in rows) {
+                    list.add(board[row][col])
                 }
-                val squareValid = validate(list.toCharArray())
-                if (!squareValid) return false
+                val colValid = validate(list.toCharArray())
+                if (!colValid) return false
             }
+            return true
         }
 
-        return true
+        fun validSquares(): Boolean {
+            for (squareCol in 0..<3) {
+                for (squareRow in 0..<3) {
+                    val list = mutableListOf<Char>()
+                    for (col in 0..<3) {
+                        for (row in 0..<3) {
+                            list.add(board[squareRow * 3 + row][squareCol * 3 + col])
+                        }
+                    }
+                    val squareValid = validate(list.toCharArray())
+                    if (!squareValid) return false
+                }
+            }
+            return true
+        }
+
+        return validRows() && validCols() && validSquares()
     }
 }
 

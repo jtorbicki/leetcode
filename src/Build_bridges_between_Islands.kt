@@ -67,7 +67,7 @@ fun main() {
     }
 
     fun findMST(allBridges: List<Bridge>): List<Bridge> {
-        val heap = PriorityQueue(Comparator<Bridge> { b1, b2 ->
+        val heap = PriorityQueue<Bridge>({ b1, b2 ->
             b1.length - b2.length
         })
         heap.addAll(allBridges)
@@ -75,7 +75,7 @@ fun main() {
         val visited = mutableSetOf<Int>()
         val bridges = mutableListOf<Bridge>()
 
-        do  {
+        do {
             val bridge = heap.poll()
             if (bridge.island1 !in visited || bridge.island2 !in visited) {
                 visited.add(bridge.island1)

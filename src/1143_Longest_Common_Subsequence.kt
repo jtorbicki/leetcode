@@ -28,7 +28,7 @@ package `1143_Longest_Common_Subsequence`
 class Solution {
     fun longestCommonSubsequence(text1: String, text2: String): Int {
 
-        val cache = Array<IntArray>(text1.length) { IntArray(text2.length) { -1 } }
+        val cache = Array(text1.length) { IntArray(text2.length) { -1 } }
 
         fun lcs(idx1: Int, idx2: Int): Int {
             if (idx1 == text1.length || idx2 == text2.length) return 0
@@ -38,7 +38,7 @@ class Solution {
             }
 
             val result = if (text1[idx1] == text2[idx2]) {
-                1 + lcs(idx1 + 1, idx2 + 1)
+                lcs(idx1 + 1, idx2 + 1) + 1
             } else {
                 val val1 = lcs(idx1 + 1, idx2)
                 val val2 = lcs(idx1, idx2 + 1)
